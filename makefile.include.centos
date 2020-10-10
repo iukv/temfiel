@@ -6,8 +6,8 @@ CPP_OPTIONS= -DHOST=\"LinuxGNU\" \
              -DCACHE_SIZE=4000 \
              -Davoidalloc \
              -Duse_bse_te \
-             -Dtbdyn
-
+             -Dtbdyn -Duse_shmem -DVASP2WANNIER90
+             
 CPP        = gcc -E -P -C -w $*$(FUFFIX) >$*$(SUFFIX) $(CPP_OPTIONS)
 
 FC         = mpif90
@@ -20,12 +20,13 @@ OFLAG      = -O2
 OFLAG_IN   = $(OFLAG)
 DEBUG      = -O0 
 
+WANNIER90  =
 LIBDIR     = /usr/lib64
 BLAS       = -L$(LIBDIR) -lblas
 LAPACK     = -L$(LIBDIR) -llapack
 SCALAPACK  = -L/home/demo/vasp.5.4.4/scalapack-2.0.2 -lscalapack
 
-LLIBS      = $(SCALAPACK) $(LAPACK) $(BLAS)
+LLIBS      = $(SCALAPACK) $(LAPACK) $(BLAS) $(WANNIER90)
 
 LLIBS      += -L$(LIBDIR) -lfftw3
 INCS       = -I/usr/include
